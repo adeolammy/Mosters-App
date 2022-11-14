@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import { Component } from 'react';
+
+const URL_FILTERED = 'https://jsonplaceholder.typicode.com/users'
+
+class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state ={
+      mosters: []
+      
+    }
+  }
+
+  componentDidMount(){
+    fetch(URL_FILTERED)
+    .then(res => res.json())
+    .then(json =>{
+      this.setState({
+        mosters: json
+      })
+    })
+  }
+
+  render() {
+    return (
+        <div className="App">
+          <div>
+            {
+              this.state.mosters.map((item)=>{
+                return(
+                  <div key={item.id}>
+                  <h2>{item.name}</h2>
+                  <p>Email: {item.email}</p>
+                  {/* <p>Company: {item.company.name}</p> */}
+                  
+                  </div>
+                )
+              })
+            }
+          </div>
+
+        </div>
+      );
+  }
 }
 
 export default App;
