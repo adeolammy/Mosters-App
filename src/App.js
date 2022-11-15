@@ -9,10 +9,12 @@ class App extends Component {
     super(props)
 
     this.state ={
-      mosters: []
-      
+      mosters: [],
+
     }
   }
+
+
 
   componentDidMount(){
     fetch(URL_FILTERED)
@@ -24,18 +26,30 @@ class App extends Component {
     })
   }
 
+
   render() {
     return (
         <div className="App">
           <div>
+              <input 
+              type="search" 
+              className="inputSearch" 
+              placeholder="Search Moster"
+              onChange={(e)=>{
+                const filterMosters = this.state.mosters.filter((item)=>{
+                 return item.name.toLowerCase().includes(e.target.value)
+                })
+                this.setState({ mosters: filterMosters})              
+              }}
+              />
+
             {
               this.state.mosters.map((item)=>{
                 return(
                   <div key={item.id}>
-                  <h2>{item.name}</h2>
-                  <p>Email: {item.email}</p>
-                  {/* <p>Company: {item.company.name}</p> */}
-                  
+                      <h2>{item.name}</h2>
+                      <p>Email: {item.email}</p>
+
                   </div>
                 )
               })
