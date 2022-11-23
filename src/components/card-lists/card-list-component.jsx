@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 class CardList extends Component {
-    constructor(props){
-        super(props);
-    }
+
     render() {
         const {mosters} = this.props
         return (

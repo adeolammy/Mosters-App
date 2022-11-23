@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import CardList from './components/card-lists/card-list-component';
+import SearchBox from './components/search-box/search-box-component';
 
 const URL_FILTERED = 'https://jsonplaceholder.typicode.com/users'
 
@@ -43,18 +44,14 @@ class App extends Component {
                  return item.name.toLowerCase().includes(searchField)
                 })
     return (
-        <div className="App">
-          <div>
-              <input 
-              type="search" 
-              className="search-box" 
-              placeholder="Search Moster"
-              onChange={onSearchChange}
-              />
-
-          
-          </div>
+        <div className="App">  
+          <SearchBox 
+            onChangeHandler = {onSearchChange} 
+            placeholder="Search Mosters" 
+            className = 'search-box'
+          />                     
           <CardList mosters ={filterMosters}/>
+
         </div>
       );
   }
