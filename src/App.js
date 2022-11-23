@@ -1,7 +1,11 @@
-import './App.css';
 import { Component } from 'react';
+
+/////////////////////////////////////
+// COMPONENT
+/////////////////////////////////////
 import CardList from './components/card-lists/card-list-component';
 import SearchBox from './components/search-box/search-box-component';
+import './App.css';
 
 const URL_FILTERED = 'https://jsonplaceholder.typicode.com/users'
 

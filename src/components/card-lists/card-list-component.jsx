@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 class CardList extends Component {
 
     render() {
-        const {mosters} = this.props
+        const {mosters} = this.props;
+        
         return (
-            <div>
-                { 
-                 mosters.map((item)=>{
+            <div className='card-list'>   
+                { mosters.map((item)=>{
+                    const {name, email, id} = item;
                     return(
-                        <div key={item.id}>
-                            <h2>{item.name}</h2>
-                            <p>Email: {item.email}</p>
+                        <div key={id} className='card-container'>
+                            <img src={`https://robohash.org/${name}?set=set5&size=180x180`} alt={`mosters ${name}`} />
+                            <h2>{name}</h2>
+                            <p>Email: {email}</p>
 
                         </div>
                     )
