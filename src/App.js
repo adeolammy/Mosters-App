@@ -1,6 +1,6 @@
-
 import './App.css';
 import { Component } from 'react';
+import CardList from './components/card-lists/card-list-component';
 
 const URL_FILTERED = 'https://jsonplaceholder.typicode.com/users'
 
@@ -15,6 +15,7 @@ class App extends Component {
     }
   }
 
+//FETCHING THE API AND PASSING INTO THE STATE
   componentDidMount(){
     fetch(URL_FILTERED)
     .then(res => res.json())
@@ -25,38 +26,35 @@ class App extends Component {
     })
   }
 
+// ONCHANGE EVENT FROM THE INPUT FIELD
+  onSearchChange = (e) => {
+      const searchField = e.target.value.toLowerCase()
+      this.setState( { searchField})              
+    }
+              
 
   render() {
+    // DISTRUCTING THE (THIS AND THIS.STATE)
+    const { mosters, searchField} = this.state;
+    const {onSearchChange } = this
 
-     const filterMosters = this.state.mosters.filter((item)=>{
-                 return item.name.toLowerCase().includes(this.state.searchField)
+// FILTERING THE MOSTERS
+     const filterMosters = mosters.filter((item)=>{
+                 return item.name.toLowerCase().includes(searchField)
                 })
     return (
         <div className="App">
           <div>
               <input 
               type="search" 
-              className="inputSearch" 
+              className="search-box" 
               placeholder="Search Moster"
-              onChange={(e)=>{
-               const searchField = e.target.value.toLowerCase()
-                this.setState( { searchField})              
-              }}
+              onChange={onSearchChange}
               />
 
-            {
-              filterMosters.map((item)=>{
-                return(
-                  <div key={item.id}>
-                      <h2>{item.name}</h2>
-                      <p>Email: {item.email}</p>
-
-                  </div>
-                )
-              })
-            }
+          
           </div>
-
+          <CardList mosters ={filterMosters}/>
         </div>
       );
   }
